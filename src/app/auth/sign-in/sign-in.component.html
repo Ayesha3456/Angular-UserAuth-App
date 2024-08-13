@@ -1,0 +1,52 @@
+<div class="ax-container">
+    <div class="left">
+      <div class="card bg-transparent border-0">
+        <div class="card-title mt-4 ms-3">
+          <img [src]="ImagePath" alt="Logo" class="mb-3" />
+        </div>
+        <div class="card-body mt-5">
+          <div class="text-center">
+            <img [src]="ImagePath1" alt="Logo" class="mb-3" width="200" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="d-flex justify-content-center align-items-center ax-mt">
+        <div>
+          <ng-container *ngIf="!isLoading; else loadingTemplate">
+            <h3 class="text-center mb-4">Welcome Back, John!</h3>
+            <form>
+              <div class="mb-3">
+                <label for="emailOrPhone" class="form-label">Enter Email ID</label>
+                <input type="text" id="emailOrPhone" class="form-control" [(ngModel)]="emailOrPhone" placeholder="Loremipsum@gmail.com" name="emailOrPhone" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Enter Password</label>
+                <input type="password" id="password" class="form-control" [(ngModel)]="password" placeholder="Password" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100" (click)="onSignIn()">Next</button>
+              <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+            </form>
+            <!-- Sign Up Link -->
+            <div class="text-center mt-3">
+              <p>Don't have an account? <a [routerLink]="['/sign-up']">Sign Up</a></p>
+            </div>
+          </ng-container>
+  
+          <ng-template #loadingTemplate>
+            <div class="text-center">
+              <img [src]="loadingImagePath" alt="Loading" class="mb-3" height="150" width="150" />
+              <p class="ax-log">Logging you in...</p>
+              <p class="ax-log2">Kindly wait as we are curating the data accordingly.</p>
+            </div>
+            <!-- Sign Up Link in Loading State -->
+            <div class="text-center mt-3">
+                <p>Don't have an account? <a [routerLink]="['/sign-up']">Sign Up</a></p>
+              </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  

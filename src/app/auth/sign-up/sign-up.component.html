@@ -1,0 +1,192 @@
+<div class="ax-container">
+  <div class="left">
+    <div class="card bg-transparent border-0">
+      <div class="card-title mt-4 ms-3">
+        <img [src]="ImagePath" alt="Logo" class="mb-3" />
+      </div>
+      <div class="card-body mt-5 text-center">
+        <img [src]="ImagePath1" alt="Logo" class="mb-3" width="200" />
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="d-flex justify-content-center align-items-center ax-mt">
+      <div>
+        <ng-container *ngIf="!loading; else loadingTemplate">
+          <!-- Step 1 -->
+          <ng-container *ngIf="currentStep === 1; else step2Template">
+            <h3 class="text-center mb-4">Create Your Account</h3>
+            <div class="progress-container">
+              <div class="progress mt-4 step1-progress">
+                <div
+                  class="progress-bar bg-primary"
+                  role="progressbar"
+                  [style.width.%]="50"
+                  aria-valuenow="50"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+            <form (ngSubmit)="onContinueStep1()" #step1Form="ngForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-control"
+                  [(ngModel)]="name"
+                  placeholder="John Doe"
+                  name="name"
+                  required
+                  #nameInput="ngModel"
+                />
+                <div *ngIf="nameInput.invalid && nameInput.touched" class="text-danger">
+                  Name is required.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="emailOrPhone" class="form-label">Enter Email ID</label>
+                <input
+                  type="text"
+                  id="emailOrPhone"
+                  class="form-control"
+                  [(ngModel)]="emailOrPhone"
+                  placeholder="Loremipsum@gmail.com"
+                  name="emailOrPhone"
+                  required
+                  #emailInput="ngModel"
+                />
+                <div *ngIf="emailInput.invalid && emailInput.touched" class="text-danger">
+                  Email is required.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Create Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  [(ngModel)]="password"
+                  placeholder="Password"
+                  name="password"
+                  required
+                  #passwordInput="ngModel"
+                />
+                <div *ngIf="passwordInput.invalid && passwordInput.touched" class="text-danger">
+                  Password is required.
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100" [disabled]="step1Form.invalid">Continue</button>
+              <div class="text-center mt-3">
+                <p>Already have an account? <a [routerLink]="['/sign-in']">Sign In</a></p>
+              </div>
+            </form>
+          </ng-container>
+
+          <!-- Step 2 -->
+          <ng-template #step2Template>
+            <h3 class="text-center mb-3">Complete Your Sign-Up</h3>
+            <div class="progress-container">
+              <div class="progress mt-1 mb-2 step1-progress">
+                <div
+                  class="progress-bar bg-primary"
+                  role="progressbar"
+                  [style.width.%]="100"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+            <form (ngSubmit)="onSubmitStep2()" #step2Form="ngForm">
+              <div class="step2-grid">
+                <div class="form-group">
+                  <label for="organizationName" class="form-label">Organization Name</label>
+                  <input
+                    type="text"
+                    id="organizationName"
+                    class="form-control"
+                    [(ngModel)]="organizationName"
+                    name="organizationName"
+                    required
+                    #organizationInput="ngModel"
+                  />
+                  <div *ngIf="organizationInput.invalid && organizationInput.touched" class="text-danger">
+                    {{ organizationError || 'Organization name is required.' }}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="designation" class="form-label">Designation</label>
+                  <select
+                    id="designation"
+                    class="form-control"
+                    [(ngModel)]="designation"
+                    name="designation"
+                    required
+                  >
+                    <option
+                      *ngFor="let option of designations"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="birthDate" class="form-label">Birth Date</label>
+                  <input
+                    type="date"
+                    id="birthDate"
+                    class="form-control"
+                    [(ngModel)]="birthDate"
+                    name="birthDate"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="city" class="form-label">City</label>
+                  <input
+                    type="text"
+                    id="city"
+                    class="form-control"
+                    [(ngModel)]="city"
+                    name="city"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="pincode" class="form-label">Pincode</label>
+                  <input
+                    type="text"
+                    id="pincode"
+                    class="form-control"
+                    [(ngModel)]="pincode"
+                    name="pincode"
+                    required
+                    #pincodeInput="ngModel"
+                  />
+                  <div *ngIf="pincodeInput.invalid && pincodeInput.touched" class="text-danger">
+                    {{ pincodeError || 'Pincode is required.' }}
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" (click)="onBack()">Back</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </ng-template>
+        </ng-container>
+
+        <!-- Loading -->
+        <ng-template #loadingTemplate>
+          <div class="text-center">
+            <img [src]="loadingImagePath" alt="Loading" class="img-fluid" />
+            <p class="mt-3">Please wait...</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

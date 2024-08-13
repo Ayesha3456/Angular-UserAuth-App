@@ -1,0 +1,37 @@
+.ax-container {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  width: 80%;
+  height: 100%;
+  margin-top: 68px;
+  margin-left: 10%;
+}
+
+.left {
+  background-color: #dbe9f6 !important;
+  height: 458px !important;
+}
+
+.right {
+  background-color: rgba(245, 245, 245, 1) !important;
+  height: 458px !important;
+}
+
+.ax-mt {
+  margin-top: 2rem !important;
+}
+
+.ax-log {
+  font-family: Lato;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 33.6px;
+}
+
+.ax-log2 {
+  font-family: Lato;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
