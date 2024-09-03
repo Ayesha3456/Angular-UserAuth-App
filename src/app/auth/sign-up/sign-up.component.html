@@ -115,6 +115,8 @@
                   <div *ngIf="organizationInput.invalid && organizationInput.touched" class="text-danger">
                     {{ organizationError || 'Organization name is required.' }}
                   </div>
+                  <!-- Comment for suggesting available organization names -->
+                  <small class="text-muted">Available organizations: {{ allowedOrganizations.join(', ') }}</small>
                 </div>
                 <div class="form-group">
                   <label for="designation" class="form-label">Designation</label>
